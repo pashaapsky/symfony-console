@@ -1,0 +1,13 @@
+{
+    "name": "apsky/symfony",
+    "authors": [
+        {
+            "name": "pashaapsky",
+            "email": "ap.sky@yandex.ru"
+        }
+    ],
+    "require": {
+        "symfony/console": "^5.1"
+    },
+
+}
