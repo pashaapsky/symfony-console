@@ -9,6 +9,6 @@ use Symfony\Component\Console\Application;
 $application = new Application();
 
 // ... register commands
-$application->add(new printStrCommand('this str'));
+$application->add(new printStrCommand());
 
 $application->run();

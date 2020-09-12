@@ -2,7 +2,9 @@
 namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class printStrCommand extends Command
@@ -17,21 +19,18 @@ class printStrCommand extends Command
 
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp('This command print string N times')
+            ->setHelp('This command print $string N $times')
+            ->addArgument('string', InputArgument::REQUIRED, 'string to print')
+            ->addOption('times', '-t', InputOption::VALUE_REQUIRED, 'times to print $string', 2)
         ;
-    }
-
-    public function __construct(String $s, int $times = 2)
-    {
-        parent::__construct();
-
-        for ($i = 0; $i < $times; $i++) {
-            echo $s . PHP_EOL;
-        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        for ($i = 0; $i < $input->getOption('times'); $i++) {
+            $output->writeln($input->getArgument('string'));
+        }
+
         return Command::SUCCESS;
     }
 }
