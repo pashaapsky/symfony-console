@@ -2,6 +2,7 @@
 namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -17,19 +18,15 @@ class sayHelloCommand extends Command
 
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp('This command print hello + $s')
+            ->setHelp('This command print hello to $name')
+            ->addArgument('name', InputArgument::REQUIRED, 'Hello to?')
         ;
-    }
-
-    public function __construct(String $s)
-    {
-        parent::__construct();
-
-        echo 'Привет ' . $s . PHP_EOL;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln('Hello ' . $input->getArgument('name'));
+
         return Command::SUCCESS;
     }
 }
